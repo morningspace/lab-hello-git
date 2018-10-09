@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 LABEL maintainer="morningspace@yahoo.com"
 
-COPY ./conf ./docker/init-git-remote.sh ~/
+COPY ./conf ./docker/init-git-remote.sh /tmp/
 
 RUN \
 # install packages
@@ -17,14 +17,14 @@ RUN \
 # SSH login fix. Otherwise user is kicked off after login
     sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd && \
 # apache2 settings
-    cp -r ~/gitweb/apache2/* /etc/apache2/ && \
+    cp -r /tmp/gitweb/apache2/* /etc/apache2/ && \
     echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf && \
     a2enconf servername && \
     a2enmod cgi && \
 # add git user
     useradd -m git && \
 # gitweb settings
-    cp ~/gitweb/gitweb.conf /etc/
+    cp /tmp/gitweb/gitweb.conf /etc/
 
 USER git
 
@@ -43,13 +43,15 @@ RUN \
 # change shell
     chsh git -s $(which git-shell) && \
 # copy default git scripts
-    cp -r ~/git-shell-commands/* /home/git/git-shell-commands/ && \
+    cp -r /tmp/git-shell-commands/* /home/git/git-shell-commands/ && \
 # change owner to git
     find /home/git/git-shell-commands -type f -exec chmod 700 {} \; -exec chown git:git {} \; && \
-# change mode for init script
-    chmod +x /init-git-remote.sh
+# prepare init script
+    cp /tmp/init-git-remote.sh / && \
+    chmod +x /init-git-remote.sh && \
+    rm -r /tmp/*
 
-ENTRYPOINT ["~/init-git-remote.sh"]
+ENTRYPOINT ["/init-git-remote.sh"]
 
 EXPOSE 22
 
