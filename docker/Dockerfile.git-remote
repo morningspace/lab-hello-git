@@ -4,7 +4,7 @@ LABEL maintainer="morningspace@yahoo.com"
 
 RUN apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests -y \
-    git openssh-server vim && \
+    openssh-server apache2 git gitweb highlight vim && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/run/sshd && \
@@ -12,6 +12,12 @@ RUN mkdir -p /var/run/sshd && \
     sed -i 's/#\s*PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     # SSH login fix. Otherwise user is kicked off after login
     sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+
+COPY ./docker/gitweb /etc/
+
+RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf && \
+    a2enconf servername && \
+    a2enmod cgi
 
 RUN useradd -m git
 
@@ -21,7 +27,8 @@ RUN cd && \
     mkdir .ssh && chmod 755 .ssh && touch .ssh/authorized_keys && \
     mkdir git-shell-commands && chmod 755 git-shell-commands && \
     #
-    git init --bare hello-git.git
+    git init --bare hello-git.git && \
+    echo Say hello to git! > hello-git.git/description
 
 USER root
 
