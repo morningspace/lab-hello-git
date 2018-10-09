@@ -1,0 +1,20 @@
+FROM ubuntu:bionic
+
+LABEL maintainer="morningspace@yahoo.com"
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends --no-install-suggests -y \
+    git openssh-client vim && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git config --global user.name "dev" && \
+    git config --global user.email "dev@example.com" && \
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa -C 'dev@example.com' -N ''
+
+COPY ./docker/init-git-local.sh /
+
+RUN chmod +x /init-git-local.sh
+
+ENTRYPOINT ["/init-git-local.sh"]
+
+CMD ["/bin/bash"]

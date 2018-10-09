@@ -1,0 +1,38 @@
+FROM ubuntu:bionic
+
+LABEL maintainer="morningspace@yahoo.com"
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends --no-install-suggests -y \
+    git openssh-server vim && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/run/sshd && \
+    echo 'root:passw0rd' | chpasswd && \
+    sed -i 's/#\s*PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    # SSH login fix. Otherwise user is kicked off after login
+    sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+
+RUN useradd -m git
+
+USER git
+
+RUN cd && \
+    mkdir .ssh && chmod 755 .ssh && touch .ssh/authorized_keys && \
+    mkdir git-shell-commands && chmod 755 git-shell-commands && \
+    #
+    git init --bare hello-git.git
+
+USER root
+
+RUN chsh git -s $(which git-shell) 
+
+COPY ./docker/init-git-remote.sh /
+
+RUN chmod +x /init-git-remote.sh
+
+ENTRYPOINT ["/init-git-remote.sh"]
+
+EXPOSE 22
+
+CMD ["/bin/bash"]
