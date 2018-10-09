@@ -27,6 +27,10 @@ USER root
 
 RUN chsh git -s $(which git-shell) 
 
+COPY ./docker/git-shell-commands /home/git/git-shell-commands/
+
+RUN find /home/git/git-shell-commands -type f -exec chmod 700 {} \; -exec chown git:git {} \;
+
 COPY ./docker/init-git-remote.sh /
 
 RUN chmod +x /init-git-remote.sh

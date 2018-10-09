@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# If no project name is given
+if [ $# -eq 0 ]
+then
+
+	# Display usage and stop
+	echo "Usage: create <project.git>"
+	exit 1
+
+fi
+
+# Set the project name, adding .git if necessary
+project=$(echo "$*" | sed 's/\.git$\|$/.git/i')
+
+# Create and initialise the project
+mkdir "$project" && \
+cd "$project" && \
+git --bare init
