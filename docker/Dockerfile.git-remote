@@ -2,47 +2,54 @@ FROM ubuntu:bionic
 
 LABEL maintainer="morningspace@yahoo.com"
 
-RUN apt-get update && \
+COPY ./conf ./docker/init-git-remote.sh ~/
+
+RUN \
+# install packages
+    apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests -y \
     openssh-server apache2 git gitweb highlight vim && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /var/run/sshd && \
+    rm -rf /var/lib/apt/lists/* && \
+# SSH settings
+    mkdir -p /var/run/sshd && \
     echo 'root:passw0rd' | chpasswd && \
     sed -i 's/#\s*PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    # SSH login fix. Otherwise user is kicked off after login
-    sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
-
-COPY ./docker/gitweb /etc/
-
-RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf && \
+# SSH login fix. Otherwise user is kicked off after login
+    sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd && \
+# apache2 settings
+    cp -r ~/gitweb/apache2/* /etc/apache2/ && \
+    echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf && \
     a2enconf servername && \
-    a2enmod cgi
-
-RUN useradd -m git
+    a2enmod cgi && \
+# add git user
+    useradd -m git && \
+# gitweb settings
+    cp ~/gitweb/gitweb.conf /etc/
 
 USER git
 
-RUN cd && \
+RUN \
+# git settings
+    cd && \
     mkdir .ssh && chmod 755 .ssh && touch .ssh/authorized_keys && \
     mkdir git-shell-commands && chmod 755 git-shell-commands && \
-    #
+# init sample git repository
     git init --bare hello-git.git && \
     echo Say hello to git! > hello-git.git/description
 
 USER root
 
-RUN chsh git -s $(which git-shell) 
+RUN \
+# change shell
+    chsh git -s $(which git-shell) && \
+# copy default git scripts
+    cp -r ~/git-shell-commands/* /home/git/git-shell-commands/ && \
+# change owner to git
+    find /home/git/git-shell-commands -type f -exec chmod 700 {} \; -exec chown git:git {} \; && \
+# change mode for init script
+    chmod +x /init-git-remote.sh
 
-COPY ./docker/git-shell-commands /home/git/git-shell-commands/
-
-RUN find /home/git/git-shell-commands -type f -exec chmod 700 {} \; -exec chown git:git {} \;
-
-COPY ./docker/init-git-remote.sh /
-
-RUN chmod +x /init-git-remote.sh
-
-ENTRYPOINT ["/init-git-remote.sh"]
+ENTRYPOINT ["~/init-git-remote.sh"]
 
 EXPOSE 22
 
