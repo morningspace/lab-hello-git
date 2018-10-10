@@ -18,7 +18,7 @@ The other container working as remote git, `my-git-remote`, which is the contain
 
 ![Architecture Diagram](docs/images/architecture.png)
 
-Please check the below instructions to learn how to play it.
+Please check the below instructions to learn how to play with it.
 
 For more lab projects from MorningSpace Lab, please check [morningspace.github.io](https://morningspace.github.io).
 
@@ -32,7 +32,7 @@ docker build -f docker/git-remote/Dockerfile -t morningspace/lab-git-remote .
 docker build -f docker/git-local/Dockerfile -t morningspace/lab-git-local .
 ```
 
-The docker images have also been pushed to Docker Hub. So, you can also pull them from there.
+The docker images have also been pushed to Docker Hub. So, you can pull them from there too.
 ```
 docker pull morningspace/lab-git-remote
 docker pull morningspace/lab-git-local
@@ -40,7 +40,7 @@ docker pull morningspace/lab-git-local
 
 ### Launch Remote and Local Git
 
-Launch one docker container for the image `morningspace/lab-git-remote` as remote git, and one docker container for the image `morningspace/lab-git-local` as local git:
+Launch one docker container for the image `morningspace/lab-git-remote` as remote git, and one for the image `morningspace/lab-git-local` as local git:
 ```
 docker run -it --name my-git-remote --hostname my-git-remote --net=lab -p 8080:80 morningspace/lab-git-remote
 docker run -it --name my-git-local --hostname my-git-local --net=lab morningspace/lab-git-local
@@ -61,7 +61,7 @@ The image `morningspace/lab-git-local` has already created a default one for you
 ssh root@my-git-remote
 ```
 
-Add the key to /home/git/.ssh/authorized_keys:
+Add the key to `/home/git/.ssh/authorized_keys`:
 ```
 echo <your_public_key> >> /home/git/.ssh/authorized_keys
 ```
@@ -78,7 +78,7 @@ git clone git@my-git-remote:~/hello-git.git
 
 ### Play with Your Git Repository
 
-Let's play a bit more with your git repository.
+Let's play a bit more with your `hello-git` repository.
 
 Create `README` as below:
 ```
@@ -94,9 +94,11 @@ git push origin master
 
 You can do more as you wish. e.g. try branch, tag, etc.
 
-### View Your Git Repository Using GitWeb
+### View Using GitWeb
 
 To open GitWeb from your host machine, input the below URL in browser: http://localhost:8080/gitweb
+
+![](docs/images/gitweb.png)
 
 ### Run Git Shell Commands
 
