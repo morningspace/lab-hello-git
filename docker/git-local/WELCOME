@@ -1,0 +1,9 @@
+Howdy! Welcome to MorningSpace Lab: Hello Git
+
+Before you start to explore, You can add below pub key
+to your remote git, into /home/git/.ssh/authorized_keys
+
+More on this project, see: https://github.com/morningspace/lab-hello-git.
+More on MorningSpace Lab projects, see: https://morningspace.github.io.
+
+Have fun!

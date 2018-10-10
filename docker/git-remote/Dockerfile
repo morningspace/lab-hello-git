@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 LABEL maintainer="morningspace@yahoo.com"
 
-COPY ./conf ./docker/init-git-remote.sh /tmp/
+COPY ./conf ./docker/git-remote/entrypoint.sh ./docker/git-remote/WELCOME /tmp/
 
 RUN \
 # install packages
@@ -40,19 +40,22 @@ RUN \
 USER root
 
 RUN \
-# change shell
+# change shell for git user
     chsh git -s $(which git-shell) && \
-# copy default git scripts
+# copy default git shell commands
     cp -r /tmp/git-shell-commands/* /home/git/git-shell-commands/ && \
 # change owner to git
     find /home/git/git-shell-commands -type f -exec chmod 700 {} \; -exec chown git:git {} \; && \
-# prepare init script
-    cp /tmp/init-git-remote.sh / && \
-    chmod +x /init-git-remote.sh && \
+# cp stuff
+    cp /tmp/entrypoint.sh / && \
+    cp /tmp/WELCOME / && \
+# chmod
+    chmod +x /entrypoint.sh && \
+# clean up
     rm -r /tmp/*
 
-ENTRYPOINT ["/init-git-remote.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 22
+EXPOSE 22 80
 
 CMD ["/bin/bash"]

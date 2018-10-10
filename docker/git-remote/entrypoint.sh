@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 
-echo Howdy! Welcome to MorningSpace Lab: Hello Git
-echo
-
+cat WELCOME
 service ssh start
 service apache2 start
 
