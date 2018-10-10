@@ -12,11 +12,9 @@ This is the lab project to demonstrate how to play with git.
 
 This lab project is entirely based on Docker technology. You can play it in a sandbox at your local, which is composed by a couple of Docker containers.
 
-As the figure depicted below, there is one container working as local git, `my-git-local`, which is the container built from the image `morningspace/lab-git-local`. You can run git commands from command line in this container.
+There is one container working as local git, `my-git-local`, which is the container built from the image `morningspace/lab-git-local`. You can run git commands from command line in this container.
 
 The other container working as remote git, `my-git-remote`, which is the container built from the image `morningspace/lab-git-remote`. Both openssh-server and gitweb are installed. So, you can either talk to `my-git-remote` via SSH from the command line within `my-git-local`, or HTTP from browser in your host machine.
-
-![Architecture Diagram](docs/images/architecture.png)
 
 Please check the below instructions to learn how to play with it.
 
