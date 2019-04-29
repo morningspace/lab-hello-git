@@ -18,7 +18,24 @@ There is one container working as local git, `my-git-local`, which is the contai
 
 The other container working as remote git, `my-git-remote`, which is the container built from the image `morningspace/lab-git-remote`. Both openssh-server and gitweb are installed. So, you can either talk to `my-git-remote` via SSH from the command line within `my-git-local`, or HTTP from browser in your host machine.
 
-Please check the below instructions to learn how to play with it.
+Please check the **Instructions** section to learn how to play with it. There's also a video tutorial called **"Hello Git"** series both on YouTube and YouKu which is based on this lab project. You can find all video links below:
+| Title	| Links
+| ---- 	|:----
+| 《Hello Git 0: How to Use Hello Git Project》		| [YouTube](https://youtu.be/14pBZSXHz-Y) [YouKu](http://v.youku.com/v_show/id_XMzk2NjQ5NzcyNA==.html)
+| 《Hello Git 1: Initialize Repository》						| [YouTube](https://youtu.be/q2De0LrOZFk) [YouKu](http://v.youku.com/v_show/id_XMzk3NzM3OTIxMg==.html)
+| 《Hello Git 2: Add Files》 											| [YouTube](https://youtu.be/yP9v4egMQwA) [YouKu](http://v.youku.com/v_show/id_XMzk3ODM0NjU4MA==.html)
+| 《Hello Git 3: Add Remote Repository》 					| [YouTube](https://youtu.be/KjsexSUOdNA) [YouKu](http://v.youku.com/v_show/id_XMzk3ODQzMTU5Ng==.html)
+| 《Hello Git 4: Understand Index》 								| [YouTube](https://youtu.be/dJSmmtiOoTM) [YouKu](http://v.youku.com/v_show/id_XMzk5MTU2NDk3Mg==.html)
+| 《Hello Git 5: Reset to Specified Commit》 			| [YouTube](https://youtu.be/4361HjW1ldA) [YouKu](http://v.youku.com/v_show/id_XMzk5OTA3MzE2NA==.html)
+| 《Hello Git 6: Revert Local Change》 						| [YouTube](https://youtu.be/7SpAQgzp0h8) [YouKu](http://v.youku.com/v_show/id_XMzk5OTA4NzY5Mg==.html)
+| 《Hello Git 7: Delete File》 										| [YouTube](https://youtu.be/MN0FMGIPMVM) [YouKu](http://v.youku.com/v_show/id_XMzk5OTA4ODI1Mg==.html)
+| 《Hello Git 8: Understand Branch》 							| [YouTube](https://youtu.be/1xx7-QDcQsY) [YouKu](http://v.youku.com/v_show/id_XNDAxMTgxMjg4NA==.html)
+| 《Hello Git 9: Resolve Conflict》 								| [YouTube](https://youtu.be/wjz9tbGEvRg) [YouKu](http://v.youku.com/v_show/id_XNDAyMzk0MTY1Ng==.html)
+| 《Hello Git 10: Branch for Bug Fix》							| [YouTube](https://youtu.be/G4M-ofXOqHg) [YouKu](http://v.youku.com/v_show/id_XNDA1NTQ0Mzc2OA==.html)
+| 《Hello Git 11: Branch for Feature Development》	| [YouTube](https://youtu.be/0W1ylLgdwG4) [YouKu](http://v.youku.com/v_show/id_XNDA2NzQwMzU0MA==.html)
+| 《Hello Git 12: Work with Your Mate》 						| [YouTube](https://youtu.be/mMSTEy5wbK0) [YouKu](http://v.youku.com/v_show/id_XNDA2NzQyNzMyNA==.html)
+| 《Hello Git 13: Understand Rebase》 							| [YouTube](https://youtu.be/XraY8PGivxg) [YouKu](http://v.youku.com/v_show/id_XNDA3NTQ0OTk3Mg==.html)
+| 《Hello Git 14: Manage Tags》 										| [YouTube](https://youtu.be/DI1_FastrNY) [YouKu](http://v.youku.com/v_show/id_XNDA3NTQ1MzYzNg==.html)
 
 For more lab projects from MorningSpace Lab, please check [morningspace.github.io](https://morningspace.github.io).
 
