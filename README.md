@@ -19,6 +19,7 @@ There is one container working as local git, `my-git-local`, which is the contai
 The other container working as remote git, `my-git-remote`, which is the container built from the image `morningspace/lab-git-remote`. Both openssh-server and gitweb are installed. So, you can either talk to `my-git-remote` via SSH from the command line within `my-git-local`, or HTTP from browser in your host machine.
 
 Please check the **Instructions** section to learn how to play with it. There's also a video tutorial called **"Hello Git"** series both on YouTube and YouKu which is based on this lab project. You can find all video links below:
+
 | Title	| Links
 | ---- 	|:----
 | 《Hello Git 0: How to Use Hello Git Project》		| [YouTube](https://youtu.be/14pBZSXHz-Y) [YouKu](http://v.youku.com/v_show/id_XMzk2NjQ5NzcyNA==.html)
