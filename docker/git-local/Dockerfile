@@ -8,12 +8,8 @@ RUN \
 # install packages
     apt-get update && \
     apt-get install --no-install-recommends --no-install-suggests -y \
-    git openssh-client vim && \
+    git openssh-client vim pigz git-flow && \
     rm -rf /var/lib/apt/lists/* && \
-# sample git config 
-    git config --global user.name "dev" && \
-    git config --global user.email "dev@example.com" && \
-    ssh-keygen -t rsa -f ~/.ssh/id_rsa -C 'dev@example.com' -N '' && \
 # chmod
     chmod +x /entrypoint.sh
 
