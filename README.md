@@ -74,7 +74,7 @@ docker network create lab
 
 To connect to the remote git from your local git, you need to generate SSH key and add the public key to the remote git.
 
-The image `morningspace/lab-git-local` has already created a default one for you. After launch the local git, you will see the welcome message with the public key output to the terminal. Copy the key and login to the remote git using `root:password`:
+The image `morningspace/lab-git-local` has already created a default one for you. After launch the local git, you will see the welcome message with the public key output to the terminal. Copy the key and login to the remote git using `root:passw0rd`:
 ```
 ssh root@my-git-remote
 ```
